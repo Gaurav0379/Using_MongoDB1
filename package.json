@@ -1,0 +1,18 @@
+{
+  "name": "using_mongodb",
+  "version": "1.0.0",
+  "description": "MVC: Model:(It is Database(i.e. Collections of MongoDB)) View:(for the UI(using ReactJs)) Controller:(Controls the logic of a router)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Gaurav",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {}
+}
