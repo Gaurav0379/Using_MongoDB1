@@ -9,7 +9,7 @@ const IssuedBook = require('../dtos/books-dto');
 
 exports.getAllBooks = async (req,res)=>{
     const books = await BookModel.find();
-    if(books.length === 0){
+    if(books.length == 0){
         return res.status(404).json({
             success:false,
             message:'No books found'
@@ -79,13 +79,13 @@ exports.addNewBook = async (req,res)=>{
             message:'No data found'
         })
     }
-   const exist = BookModel.findOne({name:data.name});
-   if(exist){
+   //const exist = BookModel.findOne({name:data.name});
+  /* if(exist){
     return res.status(404).json({
         success:false,
         message:'book already exist'
     })
-   }
+   }*/
     await BookModel.create(data);
     const allthebooks = await BookModel.find();
 

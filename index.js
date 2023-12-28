@@ -3,6 +3,7 @@ const express = require('express');
 const port = 8081;
 //Declaring it as app
 const app = express();
+app.use(express.json());
 //Importing dotenv
 const dotenv = require('dotenv');
 //Configering env file
@@ -17,7 +18,7 @@ const Dbconnection = require('/workspaces/Using_MongoDB1/databaseConnection.js')
 Dbconnection();
 
 // Importing models
-const {UserModel,BookModel} = require('/workspaces/Using_MongoDB1/models/index.js');
+const {UserModel,BookModel} = require("/workspaces/Using_MongoDB1/models");
 
 app.get('/',(req,res)=>{
     res.status(200).json({

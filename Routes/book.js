@@ -18,6 +18,6 @@ router.get('/issuedBook',getAllIssuedBooks);
 router.post('/',addNewBook);
 
 //delete a book
-router.delete('/',deleteBookById);
+router.delete('/:id',deleteBookById);
 
 module.exports = router;
