@@ -93,7 +93,7 @@ exports.updateUserById = async (req,res)=>{
 
 exports.userSubscriptionDetailsById = async (req,res)=>{
     const {id} = req.params;
-    const user = await UserModel.findById({_id:id});
+    const user = await UserModel.findOne({_id:id});
     if(!user){
         return res.status(404).json({
             success: false,
@@ -130,7 +130,7 @@ exports.userSubscriptionDetailsById = async (req,res)=>{
         ...user,
         subscriptionexpiration: subscriptionExpiryDate < currentDate,
         daysleft: subscriptionExpiryDate <= currentDate ? 0 : (subscriptionExpiryDate - currentDate),
-        fine : returnDate < currentDate ? subscriptionExpiryDate < currentDate ? 200 : 100 : 0
+        fine : returnDate > currentDate ? subscriptionExpiryDate < currentDate ? 200 : 100 : 0
     }
     return res.status(200).json({
         success:true,

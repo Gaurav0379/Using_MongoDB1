@@ -3,7 +3,7 @@
 class IssuedBook{
     _id;
     name;
-    gerne;
+    genre;
     price;
     publisher;
     issuedBy;
@@ -11,11 +11,11 @@ class IssuedBook{
     returnDate;
 
     constructor (user){
-        this._id = user.IssuedBook._id;
-        this.name = user.IssuedBook.name;
-        this.gerne = user.IssuedBook.gerne;
-        this.publisher = user.IssuedBook.publisher;
-        this.price = user.IssuedBook.price;
+        this._id = user.issuedBook._id;
+        this.name = user.issuedBook.name;
+        this.genre = user.issuedBook.genre;
+        this.publisher = user.issuedBook.publisher;
+        this.price = user.issuedBook.price;
         this.issuedDate = user.issuedDate;
         this.issuedBy = user.name;
         this.returnDate = user.returnDate;

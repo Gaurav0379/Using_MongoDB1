@@ -12,7 +12,7 @@ router.get('/:id',getBookById);
 router.put('/:id',updatethebookbyid);
 
 //Get all IssuedBook
-router.get('/issuedBook',getAllIssuedBooks);
+router.get('/issuedBook/books',getAllIssuedBooks);
 
 //add a new book
 router.post('/',addNewBook);

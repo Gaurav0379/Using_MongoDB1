@@ -23,7 +23,7 @@ exports.getAllBooks = async (req,res)=>{
 
 exports.getBookById = async (req,res)=>{
     const {id} = req.params;
-    const getthebook = await BookModel.findOne(id);
+    const getthebook = await BookModel.findById({_id:id});
     if(!getthebook){
         return res.status(404).json({
             success:false,
@@ -39,14 +39,14 @@ exports.getBookById = async (req,res)=>{
 exports.updatethebookbyid = async (req,res)=>{
     const {data}  = req.body;
     const {id} = req.params;
-    const book = await BookModel.findById(id);
+    const book = await BookModel.findById({_id:id});
     if(!book){
         return res.status(404).json({
             success:false,
             message:`Book with the id = ${id} doesnot exist` 
         })
     }
-    await book.updateOne({_id:id},data,{new:true});
+    await BookModel.updateOne({_id:id},{$set:{...data}},{new:true});
     return res.status(200).json({
         success:true,
         updatedBook : book
@@ -58,8 +58,8 @@ exports.getAllIssuedBooks = async (req,res)=>{
         issuedBook:{$exists:true},
     }).populate("issuedBook")
     //DTOS(Data Transfer Objects)
-    const issuedBook = users.map((each)=> new IssuedBook(each));
-    if(issuedBook.length == 0){
+    const issuedBook1 = users.map((each)=> new IssuedBook(each));
+    if(issuedBook1.length == 0){
         return res.status(404).json({
             success:false,
             message:'No issued book exist'
@@ -67,7 +67,7 @@ exports.getAllIssuedBooks = async (req,res)=>{
     }
     return res.status(200).json({
         success:true,
-        Books:issuedBook
+        Books:issuedBook1
     })
 }
 
@@ -79,13 +79,14 @@ exports.addNewBook = async (req,res)=>{
             message:'No data found'
         })
     }
-   //const exist = BookModel.findOne({name:data.name});
-  /* if(exist){
+   const exist = BookModel.findOne({name:data.name});
+   console.log(data.name);
+   if(exist){
     return res.status(404).json({
         success:false,
-        message:'book already exist'
+        message:'book already exist!!'
     })
-   }*/
+   }
     await BookModel.create(data);
     const allthebooks = await BookModel.find();
 
@@ -97,7 +98,7 @@ exports.addNewBook = async (req,res)=>{
 
 exports.deleteBookById = async (req,res)=>{
     const {id} = req.params;
-    await BookModel.deleteOne(id)
+    await BookModel.deleteOne({_id:id})
     const allthebooks = await BookModel.find();
     return res.status(200).json({
         success:true,
